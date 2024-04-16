@@ -1,0 +1,1 @@
+[{"size":2,"price":499.99,"name":"Standard Room","available":false,"id":1,"floor":1,"beds":1,"customer":[35]},{"size":4,"price":897.0,"name":"Double Room","available":true,"id":2,"floor":2,"beds":2,"customer":[0]},{"size":2,"price":1500.0,"name":"LoftRoom","available":false,"id":3,"floor":10,"beds":1,"customer":["22","27"]}]

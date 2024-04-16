@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.example.Rooms;
+
 class Food implements Serializable
 {
     int idClient;
@@ -93,10 +95,12 @@ class holder implements Serializable
     Singleroom deluxe_singleerrom[]=new Singleroom[20]; //Deluxe
 }
 
+
 class Hotel
 {
     static holder hotel_ob=new holder();
     static Scanner sc = new Scanner(System.in);
+
     static void CustDetails(int i,int rn)
     {
         String name, contact, gender;
@@ -289,76 +293,6 @@ class Hotel
         System.out.println("Number of rooms available : "+count);
     }
     
-    static void bill(int rn,int rtype)
-    {
-        double amount=0;
-        String list[]={"Sandwich","Pasta","Noodles","Coke"};
-        System.out.println("\n*******");
-        System.out.println(" Bill:-");
-        System.out.println("*******");
-               
-        switch(rtype)
-        {
-            case 1:
-                amount+=4000;
-                    System.out.println("\nRoom Charge - "+4000);
-                    System.out.println("\n===============");
-                    System.out.println("Food Charges:- ");
-                    System.out.println("===============");
-                     System.out.println("Item   Quantity    Price");
-                    System.out.println("-------------------------");
-                    for(Food obb:hotel_ob.luxury_doublerrom[rn].food)
-                    {
-                        amount+=obb.price;
-                        String format = "%-10s%-10s%-10s%n";
-                        System.out.printf(format,list[obb.itemno-1],obb.quantity,obb.price );
-                    }
-                    
-                break;
-            case 2:amount+=3000;
-                    System.out.println("Room Charge - "+3000);
-                    System.out.println("\nFood Charges:- ");
-                    System.out.println("===============");
-                     System.out.println("Item   Quantity    Price");
-                    System.out.println("-------------------------");
-                    for(Food obb:hotel_ob.deluxe_doublerrom[rn].food)
-                    {
-                        amount+=obb.price;
-                        String format = "%-10s%-10s%-10s%n";
-                        System.out.printf(format,list[obb.itemno-1],obb.quantity,obb.price );
-                    }
-                break;
-            case 3:amount+=2200;
-                    System.out.println("Room Charge - "+2200);
-                    System.out.println("\nFood Charges:- ");
-                    System.out.println("===============");
-                    System.out.println("Item   Quantity    Price");
-                    System.out.println("-------------------------");
-                    for(Food obb:hotel_ob.luxury_singleerrom[rn].food)
-                    {
-                        amount+=obb.price;
-                        String format = "%-10s%-10s%-10s%n";
-                        System.out.printf(format,list[obb.itemno-1],obb.quantity,obb.price );
-                    }
-                break;
-            case 4:amount+=1200;
-                    System.out.println("Room Charge - "+1200);
-                    System.out.println("\nFood Charges:- ");
-                    System.out.println("===============");
-                    System.out.println("Item   Quantity    Price");
-                    System.out.println("-------------------------");
-                    for(Food obb: hotel_ob.deluxe_singleerrom[rn].food)
-                    {
-                        amount+=obb.price;
-                        String format = "%-10s%-10s%-10s%n";
-                        System.out.printf(format,list[obb.itemno-1],obb.quantity,obb.price );
-                    }
-                break;
-            default:
-                System.out.println("Not valid");
-        }
-        System.out.println("\nTotal Amount- "+amount);
-    }
     
     static void deallocate(int rn,int rtype)
     {
@@ -377,7 +311,7 @@ class Hotel
                  w=sc.next().charAt(0);
                 if(w=='y'||w=='Y')
                 {
-                    bill(rn,rtype);
+                    //bill(rn,rtype);
                     hotel_ob.luxury_doublerrom[rn]=null;
                     System.out.println("Deallocated succesfully");
                 }
@@ -395,7 +329,7 @@ class Hotel
                  w=sc.next().charAt(0);
                 if(w=='y'||w=='Y')
                 {
-                    bill(rn,rtype);
+                    //bill(rn,rtype);
                     hotel_ob.deluxe_doublerrom[rn]=null;
                     System.out.println("Deallocated succesfully");
                 }
@@ -413,7 +347,7 @@ class Hotel
                 w=sc.next().charAt(0);
                 if(w=='y'||w=='Y')
                 {
-                    bill(rn,rtype);
+                    //bill(rn,rtype);
                     hotel_ob.luxury_singleerrom[rn]=null;
                     System.out.println("Deallocated succesfully");
                 }
@@ -431,7 +365,7 @@ class Hotel
                  w=sc.next().charAt(0);
                 if(w=='y'||w=='Y')
                 {
-                    bill(rn,rtype);
+                    //bill(rn,rtype);
                     hotel_ob.deluxe_singleerrom[rn]=null;
                     System.out.println("Deallocated succesfully");
                 }
@@ -442,41 +376,6 @@ class Hotel
         }
     }
     
-    static void order(int rn,int rtype)
-    {
-        int i,q;
-        char wish;
-         try{
-             System.out.println("\n==========\n   Menu:  \n==========\n\n1.Sandwich\tRs.50\n2.Pasta\t\tRs.60\n3.Noodles\tRs.70\n4.Coke\t\tRs.30\n");
-        do
-        {
-            i = sc.nextInt();
-            System.out.print("Quantity- ");
-            q=sc.nextInt();
-           
-              switch(rtype){
-            case 1: hotel_ob.luxury_doublerrom[rn].food.add(new Food(i,q));
-                break;
-            case 2: hotel_ob.deluxe_doublerrom[rn].food.add(new Food(i,q));
-                break;
-            case 3: hotel_ob.luxury_singleerrom[rn].food.add(new Food(i,q));
-                break;
-            case 4: hotel_ob.deluxe_singleerrom[rn].food.add(new Food(i,q));
-                break;                                                 
-        }
-              System.out.println("Do you want to order anything else ? (y/n)");
-              wish=sc.next().charAt(0); 
-        }while(wish=='y'||wish=='Y');  
-        }
-         catch(NullPointerException e)
-            {
-                System.out.println("\nRoom not booked");
-            }
-         catch(Exception e)
-         {
-             System.out.println("Cannot be done");
-         }
-    }
 }
 
 
@@ -519,6 +418,7 @@ public class Main {
         int ch,ch2;
         char wish;
         x:
+        Clients.newCustomerH();
         do{
 
         System.out.println("\nEnter your choice :\n1.Display room details\n2.Display room availability \n3.Book\n4.Order food\n5.Checkout\n6.Exit\n");
@@ -541,14 +441,6 @@ public class Main {
                      ch2 = sc.nextInt();
                      if(ch2>60)
                          System.out.println("Room doesn't exist");
-                     else if(ch2>40)
-                         Hotel.order(ch2-41,4);
-                     else if(ch2>30)
-                         Hotel.order(ch2-31,3);
-                     else if(ch2>10)
-                         Hotel.order(ch2-11,2);
-                     else if(ch2>0)
-                         Hotel.order(ch2-1,1);
                      else
                          System.out.println("Room doesn't exist");
                      break;
@@ -568,7 +460,6 @@ public class Main {
                      else
                          System.out.println("Room doesn't exist");
                      break;
-            case 6:break x;
                 
         }
            
@@ -588,7 +479,7 @@ public class Main {
         }        
             catch(Exception e)
             {
-                System.out.println("Not a valid input");
+            System.out.println("Not a valid input " + e);
             }
     }
 }
