@@ -20,9 +20,10 @@ public class HelloController {
 
     @RequestMapping("/")
     String hello() {
-        return "Hello World!";
+        return "I'm not getting this shit";
     }
 
+    
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(HelloController.class, args);
